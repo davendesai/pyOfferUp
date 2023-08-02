@@ -3,34 +3,24 @@ query GetModularFeed($searchParams: [SearchParam], $debug: Boolean = false) {
         analyticsData {
             requestId
             searchSessionId
-            __typename
         }
-
         filters {
             ...modularFilterNumericRange
             ...modularFilterSelectionList
-            __typename
         }
-
         looseTiles {
             ...modularTileListing
-            __typename
         }
-
         pageCursor
-
         query {
             ...modularQueryInfo
-            __typename
         }
     }
 }
-
 fragment modularFilterNumericRange on ModularFeedNumericRangeFilter {
     isExpandedHighlight
     lowerBound {
         ...modularFilterNumericRangeBound
-        __typename
     }
     shortcutLabel
     shortcutRank
@@ -40,20 +30,15 @@ fragment modularFilterNumericRange on ModularFeedNumericRangeFilter {
     type
     upperBound {
         ...modularFilterNumericRangeBound
-        __typename
     }
-    __typename
 }
-
 fragment modularFilterNumericRangeBound on ModularFeedNumericRangeFilterNumericRangeBound {
     label
     limit
     placeholderText
     targetName
     value
-    __typename
 }
-
 fragment modularFilterSelectionList on ModularFeedSelectionListFilter {
     targetName
     title
@@ -64,30 +49,22 @@ fragment modularFilterSelectionList on ModularFeedSelectionListFilter {
     isExpandedHighlight
     options {
         ...modularFilterSelectionListOption
-        __typename
     }
-    __typename
 }
-
 fragment modularFilterSelectionListOption on ModularFeedSelectionListFilterOption {
     isDefault
     isSelected
     label
     subLabel
     value
-    __typename
 }
-
 fragment modularTileListing on ModularFeedTileListing {
     tileId
     listing {
         ...modularListing
-        __typename
     }
     tileType
-    __typename
 }
-
 fragment modularListing on ModularFeedListing {
     listingId
     conditionText
@@ -96,20 +73,16 @@ fragment modularListing on ModularFeedListing {
         height
         url
         width
-        __typename
     }
     isFirmPrice
     locationName
     price
     title
     vehicleMiles
-    __typename
 }
-
 fragment modularQueryInfo on ModularFeedQueryInfo {
     appliedQuery
     decisionType
     originalQuery
     suggestedQuery
-    __typename
 }
