@@ -9,6 +9,14 @@ search_params = [
   { 'key': 'platform', 'value': 'web' },
   { 'key': 'lon', 'value': '-122.2475' },
   { 'key': 'lat', 'value': '47.7541' },
+  { 'key': 'limit', 'value': str(1) },
+]
+
+# Boston, MA
+search_params2 = [
+  { 'key': 'platform', 'value': 'web' },
+  { 'key': 'lon', 'value': '-71.0582912' },
+  { 'key': 'lat', 'value': '42.3602534', },
   { 'key': 'limit', 'value': str(50) },
 ]
 
@@ -21,7 +29,7 @@ def __get_graphql_request__(query: str):
                params={
                  'query': query,
                  'variables': json.dumps({
-                   'searchParams': search_params
+                   'searchParams': search_params2
                  })
                },
                headers={"Content-Type": "application/json",
