@@ -1,0 +1,8 @@
+query GetModularFeed($searchParams: [SearchParam], $debug: Boolean = false) {
+    modularFeed(params: $searchParams, debug: $debug) {
+        analyticsData {
+            requestId
+            searchSessionId
+        }
+    }
+}
