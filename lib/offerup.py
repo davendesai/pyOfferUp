@@ -32,7 +32,7 @@ def __get_graphql_request__(q: str, p):
 def get_feed(loc_q: str):
     lat, lon = get_exact_coords(loc_q)
 
-    query = Path('./queries/GetModularFeed.gql').read_text()
+    query = Path('./queries/Feed.gql').read_text()
     params = {
         'searchParams': [
             { 'key': 'platform', 'value': 'web' },
@@ -50,7 +50,7 @@ def get_feed(loc_q: str):
         raise SystemExit
         
 def get_details(id_q: str):
-    query = Path('./queries/GetListingDetailByListingId.gql').read_text()
+    query = Path('./queries/ListingDetail.gql').read_text()
     params = {
         'listingId': id_q
     }
