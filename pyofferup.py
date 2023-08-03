@@ -1,29 +1,31 @@
 import logging
-import sys
 import json
 
-from lib.offerup import get_feed
-from models.OUListing import *
+from lib.offerup import get_feed, get_details
+from models import *
 
-logger = logging.getLogger()
-logger.setLevel(logging.INFO)
-
-stdout = logging.StreamHandler(sys.stdout)
-stdout.setFormatter(logging.Formatter("%(name)s: %(message)s"))
-logger.addHandler(stdout)
+logging.basicConfig(level=logging.INFO)
 
 def get_listings(loc: str) -> [OUListing]:
-    feed = get_feed("Seattle, WA")
+    feed_resp = get_feed(loc)
+    # Filter out some empty or ad-based tiles
+    tiles_resp = [t for t in feed_resp if t.get('__typename', 'INVALID') == "ModularFeedTileListing"]
+    # and the extraneous bookeeping
+    listings_resp = [l['listing'] for l in tiles_resp ]
 
     def listing_hook(obj):
-        if 'tileId' in obj.keys():
-            return obj['listing']
-        if 'listingId' not in obj.keys():
-            return obj
-        return OUListing(**obj)
+        if obj['__typename'] == 'ModularFeedListing':
+            return OUListing(**obj)
+        return obj
 
-    return json.loads(json.dumps(feed), object_hook=listing_hook)
+    return json.loads(json.dumps(listings_resp), object_hook=listing_hook)
 
-def get_details(id: str):
-    pass
+def get_listing_details_from_id(id: str) -> OUListingDetail:
+    details_resp = get_details(id)
+    
+    def detail_hook(obj):
+        if obj['__typename'] == 'Listing':
+            return OUListingDetail(**obj)
+        return obj
 
+    return json.loads(json.dumps(details_resp), object_hook=detail_hook)

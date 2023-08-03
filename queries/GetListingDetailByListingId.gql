@@ -1,0 +1,92 @@
+query GetListingDetailByListingId($listingId: ID!) {
+    listing(listingId: $listingId) {
+        ...listingDetail
+        __typename
+    }
+}
+fragment listingDetail on Listing {
+    id
+    condition
+    description
+    distance {
+        unit
+        value
+        __typename
+    }
+    isFirmOnPrice
+    isLocal
+    lastEdited
+    listingCategory {
+        categoryV2 {
+            id
+            name
+        __typename
+        }
+        __typename
+    }
+    listingId
+    locationDetails {
+        distance
+        latitude
+        locationName
+        longitude
+        __typename
+    }
+    originalPrice
+    originalTitle
+    owner {
+        id
+        profile {
+            avatars {
+                squareImage
+                __typename
+            }
+            dateJoined
+            name
+            lastActive
+            itemsPurchased
+            itemsSold
+            ratingSummary {
+                average
+                count
+                __typename
+            }
+            __typename
+        }
+        __typename
+    }
+    ownerId
+    photos {
+        uuid
+        detail {
+            height
+            url
+            width
+            __typename
+        }
+        detailFull {
+            url
+            width
+            height
+            __typename
+        }
+        detailSquare {
+            height
+            url
+            width
+            __typename
+        }
+        list {
+            height
+            url
+            width
+            __typename
+        }
+        __typename
+    }
+    postDate
+    price
+    state
+    title
+    __typename
+}

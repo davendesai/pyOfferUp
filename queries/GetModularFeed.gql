@@ -1,69 +1,26 @@
-query GetModularFeed($searchParams: [SearchParam], $debug: Boolean = false) {
-    modularFeed(params: $searchParams, debug: $debug) {
+query GetModularFeed($searchParams: [SearchParam]) {
+    modularFeed(params: $searchParams) {
         analyticsData {
             requestId
             searchSessionId
-        }
-        filters {
-            ...modularFilterNumericRange
-            ...modularFilterSelectionList
+            __typename
         }
         looseTiles {
             ...modularTileListing
+            __typename
         }
         pageCursor
-        query {
-            ...modularQueryInfo
-        }
+        __typename
     }
-}
-fragment modularFilterNumericRange on ModularFeedNumericRangeFilter {
-    isExpandedHighlight
-    lowerBound {
-        ...modularFilterNumericRangeBound
-    }
-    shortcutLabel
-    shortcutRank
-    subTitle
-    targetName
-    title
-    type
-    upperBound {
-        ...modularFilterNumericRangeBound
-    }
-}
-fragment modularFilterNumericRangeBound on ModularFeedNumericRangeFilterNumericRangeBound {
-    label
-    limit
-    placeholderText
-    targetName
-    value
-}
-fragment modularFilterSelectionList on ModularFeedSelectionListFilter {
-    targetName
-    title
-    subTitle
-    shortcutLabel
-    shortcutRank
-    type
-    isExpandedHighlight
-    options {
-        ...modularFilterSelectionListOption
-    }
-}
-fragment modularFilterSelectionListOption on ModularFeedSelectionListFilterOption {
-    isDefault
-    isSelected
-    label
-    subLabel
-    value
 }
 fragment modularTileListing on ModularFeedTileListing {
     tileId
     listing {
         ...modularListing
+        __typename
     }
     tileType
+    __typename
 }
 fragment modularListing on ModularFeedListing {
     listingId
@@ -73,16 +30,11 @@ fragment modularListing on ModularFeedListing {
         height
         url
         width
+        __typename
     }
     isFirmPrice
     locationName
     price
     title
-    vehicleMiles
-}
-fragment modularQueryInfo on ModularFeedQueryInfo {
-    appliedQuery
-    decisionType
-    originalQuery
-    suggestedQuery
+    __typename
 }
